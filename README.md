@@ -1,6 +1,6 @@
 # Covid-19 Impact on length of stay Airbnb in Amsterdam
 
-What is the impact of Covid19 on the minimum days of stay in Amsterdam?
+What is the impact of Covid-19 on the minimum days of stay in Airbnb rooms in Amsterdam
 
 
 ## Motivation
