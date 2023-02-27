@@ -35,7 +35,7 @@ listings12.22_df <- read.csv(gzfile(destfile))
 When investigating the data, we can see that the December 2022 data has one more column than all the other datasets. Since this column is not improtant for us, we can delete this column:
 ```{r}
 listings12.22_df$source <- NULL
-````
+```
 
 We can then merge all the data frames by rows, since we made sure all colums were the same:
 ```{r}
