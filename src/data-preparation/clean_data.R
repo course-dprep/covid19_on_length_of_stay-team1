@@ -1,6 +1,7 @@
 # Load merged data 
 load("./gen/data-preparation/temp/data_merged.RData")
 
+# Load the necessary packages 
 library(tidyverse)
 library(dplyr)
 library(ggplot2)
