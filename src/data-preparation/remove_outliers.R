@@ -1,6 +1,6 @@
 # Load cleaned data 
 library(readr)
-read_csv("../../gen/data-preparation/output/data_cleaned.csv")
+read_csv("../../gen/data-preparation/temp/data_cleaned.csv")
 
 # Remove outliers for all relevant columns
 col_list <- c('price', 'minimum_nights') # create a list of column names
