@@ -32,4 +32,4 @@ df_cleaned$minimum_nights <- as.numeric(df_cleaned$minimum_nights)
 df_cleaned$availability_30 <- as.numeric(df_cleaned$availability_30)
 
 # Save cleaned data
-write_csv(df_cleaned,file="../../gen/data-preparation/output/data_cleaned.csv")
+write_csv(df_cleaned,file="../../gen/data-preparation/temp/data_cleaned.csv")
