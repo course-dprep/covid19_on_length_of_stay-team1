@@ -1,5 +1,6 @@
 # Load merged data 
-load("./gen/data-preparation/temp/data_merged.RData")
+library(readr)
+read_csv("../../gen/data-preparation/temp/data_merged.csv")
 
 # Load the necessary packages 
 library(tidyverse)
@@ -8,10 +9,16 @@ library(ggplot2)
 
 # Keep only the important variables for our analysis
 df_cleaned <- df_merged %>% select(id, listing_url, last_scraped, host_since, 
-                                   host_location, host_acceptance_rate, host_is_superhost,
-                                   neighbourhood_cleansed, room_type, 
-                                   accommodates, price, minimum_nights, 
-                                   availability_30, instant_bookable)
+                                   host_acceptance_rate, neighbourhood_cleansed, 
+                                   room_type, accommodates, price, minimum_nights, 
+                                   availability_30, instant_bookable) 
+
+# Arrange based on minimum nights of stay
+df_cleaned <- df_cleaned %>% arrange(minimum_nights)
+
+# Keep only listings that are listed in both 2020 and 2022
+listings_both_years <- duplicated(df_cleaned$listing_url) | duplicated(df_cleaned$listing_url, fromLast = TRUE)
+df_cleaned <- subset(df_cleaned, listings_both_years)
 
 # Change variable types to be able to use them for analysis and subsetting
 df_cleaned$price <- gsub("\\$", "", df_cleaned$price)
@@ -24,53 +31,35 @@ df_cleaned$price <- as.numeric(df_cleaned$price)
 df_cleaned$minimum_nights <- as.numeric(df_cleaned$minimum_nights)
 df_cleaned$availability_30 <- as.numeric(df_cleaned$availability_30)
 
-# check out the variables
-## numeric values
-summary(df_cleaned$host_acceptance_rate)
-summary(df_cleaned$price)
-summary(df_cleaned$accommodates)
-summary(df_cleaned$minimum_nights)
-summary(df_cleaned$availability_30)
+# Remove outliers for all relevant columns
+col_list <- c('price', 'minimum_nights') # create a list of column names
 
-## character values
-table(df_cleaned$host_location)
-table(df_cleaned$host_is_superhost)
-table(df_cleaned$neighbourhood_cleansed)
-table(df_cleaned$room_type)
-table(df_cleaned$instant_bookable)
+# loop over the column list
+for (col_name in col_list) {
+  
+  # detect outliers of the current column
+  z_scores <- scale(df_cleaned[[col_name]])
+  outliers <- abs(z_scores) > 3
+  df_outliers <- df_cleaned[outliers,]
+  
+  # remove outliers of the current column
+  df_cleaned <- df_cleaned[!outliers,]
+  
+  # histogram of the current column values after removal of outliers
+  plot <- ggplot(df_cleaned, aes(x = .data[[col_name]])) + 
+    geom_histogram(binwidth = 1, fill = "steelblue", color = "black") + 
+    ggtitle(paste("Histogram of", col_name)) + 
+    xlab("Value") + 
+    ylab("Frequency")
+  
+  # print the plot
+  print(plot)
+  
+}
 
-# Make sure the airbnb is located in Amsterdam
-df_cleaned <- df_cleaned %>%
-  filter(grepl("Amsterdam", host_location) | grepl("amsterdam", host_location)) %>%
-  filter(host_location != "Amsterdam, New York, United States", 
-         host_location != "Athens, Amsterdam & Brussels",
-         host_location != "Nieuw Amsterdam, Drenthe, Netherlands")
-
-# detect and remove outliers of price
-z_scores_price <- scale(df_cleaned$price)
-outliers_price <- abs(z_scores_price) > 3
-df_outliers_price <- df_cleaned[outliers_price,]
-df_cleaned <- df_cleaned[!outliers_price,]
-
-# histogram of price values after removal of outliers
-ggplot(df_cleaned, aes(x = price)) + 
-  geom_histogram(binwidth = 1, fill = "steelblue", color = "black") + 
-  ggtitle("Histogram of Price") + 
-  xlab("Value") + 
-  ylab("Frequency")
-
-# detect and remove outliers of minimum nights of stay
-z_scores_minimum <- scale(df_cleaned$minimum_nights)
-outliers_minimum <- abs(z_scores_minimum) > 3
-df_outliers_minimum <- df_cleaned[outliers_minimum,]
-df_cleaned <- df_cleaned[!outliers_minimum,]
-
-# histogram of minimum nights of stay after removal of outliers
-ggplot(df_cleaned, aes(x = minimum_nights)) + 
-  geom_histogram(binwidth = 1, fill = "steelblue", color = "black") + 
-  ggtitle("Histogram of Minimum nights") + 
-  xlab("Minimum nights") + 
-  ylab("Frequency")
+# make sure outliers are removed for both 2020 and 2022
+listings_both_years_2 <- duplicated(df_cleaned$listing_url) | duplicated(df_cleaned$listing_url, fromLast = TRUE)
+df_cleaned <- subset(df_cleaned, listings_both_years_2)
 
 # Save cleaned data
-save(df_cleaned,file="./gen/data-preparation/output/data_cleaned.RData")
+write_csv(df_cleaned,file="../../gen/data-preparation/output/data_cleaned.csv")
