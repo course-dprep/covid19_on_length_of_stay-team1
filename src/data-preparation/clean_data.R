@@ -31,5 +31,23 @@ df_cleaned$price <- as.numeric(df_cleaned$price)
 df_cleaned$minimum_nights <- as.numeric(df_cleaned$minimum_nights)
 df_cleaned$availability_30 <- as.numeric(df_cleaned$availability_30)
 
+# Add dummy variable covid-19
+df_cleaned$covid <- ifelse(grepl("2020", df_cleaned$last_scraped), TRUE, FALSE)
+
+# Make categorical variables ready for factorization
+table(df_cleaned$neighbourhood_cleansed)
+df_cleaned$neighbourhood_num <- as.numeric(factor(df_cleaned$neighbourhood_cleansed, levels=c("Bijlmer-Centrum", "Bos en Lommer", 
+                                                                                              "Centrum-Oost", "De Aker - Nieuw Sloten",
+                                                                                              "De Pijp - Rivierenbuurt", "Geuzenveld - Slotermeer", 
+                                                                                              "Noord-Oost", "Oostelijk Havengebied - Indische Buurt",
+                                                                                              "Oud-Noord", "Slotervaart", "Westerpark", "Bijlmer-Oost",
+                                                                                              "Buitenveldert - Zuidas", "Centrum-West", "De Baarsjes - Oud-West",
+                                                                                              "Gaasperdam - Driemond", "IJburg - Zeeburgereiland",
+                                                                                              "Noord-West", "Osdorp", "Oud-Oost", "Watergraafsmeer", "Zuid")))
+
+table(df_cleaned$room_type)
+df_cleaned$roomtype_num <- as.numeric(factor(df_cleaned$room_type, levels=c("Hotel room", "Entire home/apt", 
+                                                                            "Private room", "Shared room")))
+
 # Save cleaned data
 write_csv(df_cleaned,file="../../gen/data-preparation/temp/data_cleaned.csv")
