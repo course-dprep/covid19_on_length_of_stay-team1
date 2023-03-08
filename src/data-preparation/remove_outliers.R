@@ -3,7 +3,7 @@ library(readr)
 read_csv("../../gen/data-preparation/temp/data_cleaned.csv")
 
 # Remove outliers for all relevant columns
-col_list <- c('price', 'minimum_nights') # create a list of column names
+col_list <- c('minimum_nights', 'price') # create a list of column names
 
 # loop over the column list
 for (col_name in col_list) {
