@@ -12,7 +12,8 @@ m0 <- lm(minimum_nights ~ covid, df_cleaned)
 summary(m0)
          
 # Independence (Marijn)
-
+m0 <- lm(minimum_nights ~ covid, df_cleaned)
+plot(m0$residuals ~ df_cleaned$covid)
 # Homoskedasticity (Matthijs)
 
 # Normality (Jonas)
