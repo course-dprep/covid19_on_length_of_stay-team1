@@ -1,0 +1,32 @@
+---
+title: \color{orange}"COVID-19 On The Length Of Stay In Amsterdam"
+output: pdf_document
+authors: "Dianne Burgess, Jonas Klein, Matthijs van Gils, Marijn Bransen"
+---
+
+```{r setup, include=FALSE}
+library(tinytex)
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+# \color{orange}**Research Question**
+For this project, we decided to analyze the Airbnb market in Amsterdam and especially if the COVID-19 pandemic had an influence on the minimum nights of stay. Since there contradicted foundings in literature, we decided to take a further look at this topic.
+
+# \color{orange}**Type of Analysis**
+We decided to run a linear regression on the variables of interest. The dependent variable, the minimum nights a person should stay, is a metric variable and the independent variable, the presence of COVID-19 (present vs. absent) is a non-metric variable. We have data from 2020 and 2022 for ... Airbnb listings. The variable gets the value 1 assigned if the data is from 2020, so when there was COVID-19 in the Netherlands. Following from that, the variable gets the value 0 assigned if the data is from 2022, when the COVID-19 pandemic no longer had far-reaching consequences in the Netherlands.
+We decided to not only include the minimum nights of stay and the presence of COVID-19, but also added some control variables to our analysis, to see if there are other effects that might play a role. Since these control variables are differing in metric and non-metric variables, we have chosen linear regression over an ANOVA-analysis.
+
+# \color{orange}**Checking the Assumptions**
+Before we were able to estimate the linear regression, we first checked the assumptions.
+
+## *Independence*
+
+## *Homoskedasticity*
+
+## *Normality*
+
+## *Linearity*
+
+# \color{orange}**Conclusion**
+
