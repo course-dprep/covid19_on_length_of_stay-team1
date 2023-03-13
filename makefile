@@ -3,44 +3,36 @@
 # - Careful with spaces! If use \ to split to multiple lines, cannot have a space after \ 
 
 # OVERALL BUILD RULES
-all: data_cleaned results paper
-paper: gen/paper/output/paper.pdf
-data_cleaned: gen/data-preparation/output/data_cleaned.RData
-results: gen/analysis/output/model_results.RData
+all: data_cleaned results
+data_cleaned: ../../gen/data-preparation/output/data_no_outliers.csv
+results: ../..gen/analysis/output/model_results.csv
 .PHONY: clean
 
 # INDIVIDUAL RECIPES
 
-# Generate paper/text
-gen/paper/output/paper.pdf: gen/paper/output/table1.tex \
-				src/paper/paper.tex
-	pdflatex -interaction=batchmode -output-directory='gen/paper/output/' 'src/paper/paper.tex' 
-	pdflatex -interaction=batchmode -output-directory='gen/paper/output/' 'src/paper/paper.tex' 
-	pdflatex -output-directory='gen/paper/output/' 'src/paper/paper.tex' 
-# Note: runs pdflatex multiple times to have correct cross-references
-
-# Generate tables 
-gen/paper/output/table1.tex: gen/analysis/output/model_results.RData \
-				src/paper/tables.R
-	Rscript src/paper/tables.R
-
 # Run analysis  
-gen/analysis/output/model_results.RData: gen/data-preparation/output/data_cleaned.RData \
+../../gen/analysis/output/model_results.csv: gen/data-preparation/output/data_no_outliers.csv \
 						src/analysis/analyze.R
-	Rscript src/analysis/update_input.R
 	Rscript src/analysis/analyze.R
+	
+# Remove outliers
+../../gen/data-preparation/output/data_no_outliers.csv: gen/data-preparation/temp/data_cleaned.csv \
+						src/data-preparation/remove_outliers.R 
+	Rscript src/data-preparation/remove_outliers.R 
 
 # Clean data
-gen/data-preparation/output/data_cleaned.RData: data/dataset1/dataset1.csv \
-						data/dataset2/dataset2.csv \
-						src/data-preparation/merge_data.R \
+../../gen/data-preparation/temp/data_cleaned.csv: gen/data-preparation/temp/data_merged.csv \
 						src/data-preparation/clean_data.R 
-	Rscript src/data-preparation/update_input.R
-	Rscript src/data-preparation/merge_data.R
 	Rscript src/data-preparation/clean_data.R 
+	
+# Merge data
+../../gen/data-preparation/temp/data_merged.csv: data/dataset2020.csv.gz \
+						data/dataset2022.csv.gz \
+						src/data-preparation/merge_data.R
+	Rscript	src/data-preparation/merge_data.R
 
 # Download data
-data/dataset1/dataset1.csv data/dataset2/dataset2.csv: src/data-preparation/download_data.R 
+../../data/dataset2020.csv.gz ../../data/dataset2022.csv.gz: src/data-preparation/download_data.R 
 	Rscript src/data-preparation/download_data.R 
 
 # Clean-up: Deletes temporary files
