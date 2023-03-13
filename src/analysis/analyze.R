@@ -18,6 +18,8 @@ summary(m0)
 # Normality (Jonas)
 
 # Linearity (Dianne)
+# create a boxplot to check for linearity
+boxplot(covid ~ minimum_nights, data = df_cleaned)
 
 # Estimate simple model
 m1 <- lm(minimum_nights ~ covid + as.factor(neighbourhood_num) + as.factor(roomtype_num) + accommodates + price + instant_bookable, df_cleaned)
