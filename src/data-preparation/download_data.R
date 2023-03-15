@@ -1,6 +1,3 @@
-# Create directory
-dir.create('../../data')
-
 # Download dataset December 2020
 download.file('https://github.com/course-dprep/SickAirbnbPricesAcrossNetherlands/raw/main/Data/listings-12.20.csv.gz', '../../data/dataset2020.csv.gz')
 
