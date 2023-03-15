@@ -1,6 +1,8 @@
 # load 
 library(readr)
-read_csv("../../gen/data-preparation/output/data_no_outliers.csv")
+library(dplyr)
+library(broom)
+df_cleaned <- read_csv("../../gen/data-preparation/output/data_no_outliers.csv")
 
 # Inspecting means of minimum nights of stay before running regressions
 df_cleaned_2020 <- df_cleaned %>% filter(grepl("2020", df_cleaned$last_scraped))

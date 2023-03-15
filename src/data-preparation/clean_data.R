@@ -1,6 +1,6 @@
 # Load merged data 
 library(readr)
-read_csv("../../gen/data-preparation/temp/data_merged.csv")
+df_merged <- read_csv("../../gen/data-preparation/temp/data_merged.csv")
 
 # Load the necessary packages 
 library(tidyverse)

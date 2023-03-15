@@ -1,6 +1,7 @@
 # Load cleaned data 
 library(readr)
-read_csv("../../gen/data-preparation/temp/data_cleaned.csv")
+library(ggplot2)
+df_cleaned <- read_csv("../../gen/data-preparation/temp/data_cleaned.csv")
 
 # Remove outliers for all relevant columns
 col_list <- c('minimum_nights', 'price') # create a list of column names
