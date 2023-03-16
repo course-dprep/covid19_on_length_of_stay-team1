@@ -1,11 +1,11 @@
-# Load merged data 
-library(readr)
-df_merged <- read_csv("../../gen/data-preparation/temp/data_merged.csv")
-
 # Load the necessary packages 
 library(tidyverse)
 library(dplyr)
 library(ggplot2)
+library(readr)
+
+# Load merged data 
+df_merged <- read_csv("../../gen/data-preparation/temp/data_merged.csv")
 
 # Keep only the important variables for our analysis
 df_cleaned <- df_merged %>% select(id, listing_url, last_scraped, host_since, 

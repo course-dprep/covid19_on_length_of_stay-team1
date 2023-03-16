@@ -7,10 +7,7 @@ library(ggpubr)
 df_cleaned <- read_csv("../../gen/data-preparation/output/data_no_outliers.csv")
 
 # Inspecting means of minimum nights of stay before running regressions
-df_cleaned_2020 <- df_cleaned %>% filter(grepl("2020", df_cleaned$last_scraped))
-mean(df_cleaned_2020$minimum_nights)
-df_cleaned_2022 <- df_cleaned %>% filter(grepl("2022", df_cleaned$last_scraped))
-mean(df_cleaned_2022$minimum_nights)
+df_cleaned %>% group_by(year_scraped) %>% summarize(mean=mean(minimum_nights))
 
 # most basic model
 m0 <- lm(minimum_nights ~ covid, df_cleaned)
@@ -19,6 +16,7 @@ summary(m0)
 # Estimate simple model
 m1 <- lm(minimum_nights ~ covid + as.factor(neighbourhood_num) + as.factor(roomtype_num) + accommodates + price + instant_bookable, df_cleaned)
 summary(m1)
+
 df_m1 <- tidy(m1)
          
 # Independence (Marijn)
