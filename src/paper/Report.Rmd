@@ -5,7 +5,6 @@ authors: "Dianne Burgess, Jonas Klein, Matthijs van Gils, Marijn Bransen"
 ---
 
 ```{r setup, include=FALSE}
-library(tinytex)
 knitr::opts_chunk$set(echo = TRUE)
 
 ```
