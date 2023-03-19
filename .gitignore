@@ -5,6 +5,3 @@
 **gen/
 **.Rout
 *.csv
-.DS_Store
-*.csv.gz
-*.pdf
