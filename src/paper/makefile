@@ -1,6 +1,4 @@
-OUTPUTP = ../../gen/paper/output
+all: ../../Report.pdf
 
-all: $(OUTPUTP)/Report.pdf
-
-$(OUTPUTP)/Report.pdf: Report.Rmd
-	R --vanilla -e "rmarkdown::render('Report.Rmd', output_file = '$(OUTPUTP)/Report.pdf')"
+../../Report.pdf: Report.Rmd
+	R --vanilla -e "rmarkdown::render('Report.Rmd', output_file = '../../Report.pdf')"
