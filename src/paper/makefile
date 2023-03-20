@@ -1,4 +1,6 @@
-all: ../../Report.pdf
+all: ../../Presentation.html
 
-../../Report.pdf: Report.Rmd
-	R --vanilla -e "rmarkdown::render('Report.Rmd', output_file = '../../Report.pdf')"
+../../Presentation.html: Presentation.qmd
+	quarto render Presentation.qmd -o Presentation.html
+	mv Presentation.html ../../
+	mv Presentation_files ../../
