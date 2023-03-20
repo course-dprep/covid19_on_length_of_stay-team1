@@ -7,7 +7,7 @@ all: $(DATA)/dataset2020.csv.gz $(DATA)/dataset2022.csv.gz $(OUTPUT)/data_no_out
 $(DATA)/dataset2020.csv.gz $(DATA)/dataset2022.csv.gz: download_data.R
 		mkdir -p ../../data
 		R --vanilla < download_data.R
-    
+ 
 $(TEMP)/data_merged.csv: merge_data.R $(DATA)/dataset2020.csv.gz $(DATA)/dataset2022.csv.gz
 		R --vanilla < merge_data.R
 
