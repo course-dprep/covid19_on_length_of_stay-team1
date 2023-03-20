@@ -10,7 +10,8 @@ paper: data-preparation analysis
 	make -C src/paper
 	
 clean:
-  R -e "unlink('*.pdf')"
-  R -e "unlink('*.csv')"
-  R -e "unlink('*.csv.gz')"
-  R -e "unlink('*.html')"
+	find . -type f -name "*.pdf" -delete
+	find . -type f -name "*.csv" -delete
+	find . -type f -name "*.csv.gz" -delete
+	find . -type f -name "*.html" -delete
+
