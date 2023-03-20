@@ -33,9 +33,31 @@ Provide an overview of the directory structure and files, for example:
     └── paper
 ```
 
-## Running instructions
+## Running Instructions
+### Running The Code By Make
+To run the code, follow these instructions:
+1. Fork this repository
+2. Open your command line/terminal and run the following code:
+```
+git clone https://github.com/{your username}/covid19_on_length_of_stay-team1.git
+```
+3. Set your working directory to 'covid19_on_length_of_stay-team1' and run the following command:
+```
+make
+```
+4. When make has succesfully run all the code, it will generate a ... 
+5. To clean the data of all raw and unnecessary data files created during the pipeline, run the following code in the command line / terminal: 
+```
+make clean
+```
 
-Explain to potential users how to run/replicate your workflow. If necessary, touch upon the required input data, which secret credentials are required (and how to obtain them), which software tools are needed to run the workflow (including links to the installation instructions), and how to run the workflow.
+### Alternative Route
+An alternative route to run the code would be:
+1. ../src/data-preparation -> download_data.R
+2. ../src/data-preparation -> merge_data.R
+3. ../src/data-preparation -> remove_outliers.R
+4. ../src/data-preparation -> clean_data.R
+5. ../src/analysis -> analyze.R
 
 
 ## More resources
