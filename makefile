@@ -9,3 +9,8 @@ analysis: data-preparation
 paper: data-preparation analysis
 	make -C src/paper
 	
+clean:
+  R -e "unlink('*.pdf')"
+  R -e "unlink('*.csv')"
+  R -e "unlink('*.csv.gz')"
+  R -e "unlink('*.html')"
