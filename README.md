@@ -9,12 +9,10 @@ The research question *"What is the impact of COVID-19 on the minimum days of st
 Besides, there is a contradictory literature towards the affects of COVID-19 on the minimum nights per stay. A recent article in the New York Times has presented data suggesting that minimum night requirements for Airbnb stays in New York City were significantly higher during the COVID-19 pandemic compared to after the pandemic. However, Kourtit et al., have put forward a different perspective, suggesting that minimum night requirements actually decreased during the pandemic as hosts reduced these requirements to encourage more bookings. As such, there is a need to conduct further research to ascertain the true effect of COVID-19 on minimum night requirements. To address this research gap, an investigation will be conducted on an European city, as existing studies have primarily focused on the United States. We choose Amsterdam as an example of an European city, since we all are Dutch inhabitants.
 
 ## Method and Results
-
 #### **Method**
+To address our research question, we decided to run a linear regression on the variables of interest. The dependent variable in our research is the minimum nights of stay and our independent variable is the presence of COVID-19, which gets assigned either the value 0 or 1. We have collected data from 2020 and from 2022: all the data from 2020 is assigned to the value 1, and all the data from 2022 is assigned to the value 0. To get a more detailed explanation of the chosen method and included variables, we would like to refer to: 
 
 ### **Results**
-
-Second, summarize your results concisely. Make use of subheaders where appropriate.
 
 ## Repository Overview
 ```
@@ -40,7 +38,7 @@ Please follow the installation guides on https://tilburgsciencehub.com
 - Make
   - [Installation Guide](https://tilburgsciencehub.com/building-blocks/configure-your-computer/automation-and-workflows/make/)
 
-To install all necessary packages used in R, run the R script 'install_packages.R', which is added to our repository. Otherwise install the following packages:
+To install all necessary packages used in R, run the R script **'install_packages.R'**, which is added to our repository. Otherwise, install the following packages:
 ```
 install.packages("readr")
 install.packages("tidyverse")
