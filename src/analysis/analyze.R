@@ -68,10 +68,11 @@ bptest(m1)
 ## the p-value of this test is < 0.05 which means that the homoscedasticity assumption is not met
 
 # Normality of residuals 
+## Making a dataframe with the residuals
 residuals <- resid(m1)
 residuals_df <- data.frame(residuals = residuals)
 
-## Create random subsample of 1000 observations, so we are able to run a Shapiro-Wilk normality test (5000 is the maximum sample size)
+## Create random subsample of 5000 observations, so we are able to run a Shapiro-Wilk normality test (5000 is the maximum sample size)
 set.seed(123)
 my_subsample <- residuals_df[sample(nrow(residuals_df), 5000), ]
 shapiro.test(my_subsample)
