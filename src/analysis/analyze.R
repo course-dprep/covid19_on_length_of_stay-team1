@@ -21,9 +21,33 @@ m1 <- lm(minimum_nights ~ covid + as.factor(neighbourhood_num) + as.factor(roomt
 summary(m1)
 df_m1 <- tidy(m1)
          
-# Independence (Marijn)
-m0 <- lm(minimum_nights ~ covid, df_cleaned)
-plot(m0$residuals ~ df_cleaned$covid)
+# Independence 
+# create a scatterplot of the residuals against the predicted values from the linear regression model 'm1'
+plot(m1$fitted.values, m1$residuals, 
+     xlab = "Fitted Values", ylab = "Residuals", 
+     main = "Residuals vs. Fitted Values Plot",
+     ylim = c(-50, 60))
+# add a horizontal line at y = 0 to the plot to help visualize the residuals that are close to zero
+abline(h = 0, lty = 2, col = 'red')
+
+# Add predicted values to the data frame
+df_cleaned$predicted <- predict(m1)
+
+# Create a scatterplot of predicted vs actual values
+ggplot(df_cleaned, aes(x = predicted, y = minimum_nights)) +
+  geom_point() + # adds points to the plot
+  geom_abline(intercept = 0, slope = 1, color = "red") + # adds a diagonal line to the plot to visualize where predicted = actual
+  xlab("Predicted Values") + # adds a label for the x-axis
+  ylab("Actual Values") + # adds a label for the y-axis
+  ggtitle("Predicted vs Actual Values Plot") # adds a title to the plot
+
+# perform Durbin-Watson test
+dwtest(m1)
+
+# We can conclude that there is no independence of the residuals.
+# The null hypothesis states that the errors are not auto-correlated with themselves (they are independent).
+# With the Durbin-Watson test we achieved a p-value < 0 which means that we would reject the null hypothesis.
+
 # Homoskedasticity (Matthijs)
 
 # Normality of residuals (Jonas)
