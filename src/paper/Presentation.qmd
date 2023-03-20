@@ -1,0 +1,89 @@
+---
+title: "The impact of covid 19 on the minimum nights of stay for airbnb's in Amsterdam"
+author: "Team 1"
+format: 
+  revealjs:
+    footer: "covid 19 on minimum nights of stay - team 1"
+    theme: default
+    slide-number: true
+    embed-resources: true
+    controls: true
+    transition: slide
+editor: visual
+---
+
+# Introduction
+
+## Introduction
+
+```{r, echo=FALSE}
+# load packages
+library(quarto)
+library(readr)
+library(dplyr)
+library(broom)
+library(ggplot2)
+library(ggpubr)
+df_cleaned <- read_csv("../../gen/data-preparation/output/data_no_outliers.csv")
+```
+
+Introduction about the topic
+
+# Motivation
+
+## Motivation
+
+Motivation about the topic:
+
+# Research method
+
+## Research method
+
+First, we run the regression:
+
+```{r}
+#| echo: true
+#| output-location: fragment
+#| code-line-numbers: "2|3"
+# Estimate simple model
+m1 <- lm(minimum_nights ~ covid + as.factor(neighbourhood_num) + as.factor(roomtype_num) + accommodates + price + instant_bookable, df_cleaned)
+summary(m1)
+```
+
+# Results
+
+## Results {auto-animate="true"}
+
+``` r
+# Estimate simple model
+summary(m1)
+```
+## Results {auto-animate="true"}
+
+``` r
+# Estimate simple model
+m1 <- lm(minimum_nights ~ covid + as.factor(neighbourhood_num) + as.factor(roomtype_num) + accommodates + price + instant_bookable, df_cleaned)
+summary(m1)
+```
+
+Type explanation about the results here
+
+# Robustness checks
+
+We do need to perform some robustness checks
+
+## Independence
+
+Type how we checked for independence
+
+## Homodskedasticity
+
+## Normality
+
+## Linearity
+
+# Conclusion
+
+## Conclusion
+
+Type the conclusion here
