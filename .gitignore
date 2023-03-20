@@ -4,7 +4,9 @@
 .RData
 **gen/
 **.Rout
-*.csv
+**.csv
 **.csv.gz
 .DS_Store
-*.pdf
+**.pdf
+Presentation_files/
+
