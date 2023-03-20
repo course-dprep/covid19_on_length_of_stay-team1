@@ -9,6 +9,7 @@ format:
     embed-resources: true
     controls: true
     transition: slide
+    scrollable: true
 editor: visual
 ---
 
@@ -27,19 +28,21 @@ library(ggpubr)
 df_cleaned <- read_csv("../../gen/data-preparation/output/data_no_outliers.csv")
 ```
 
-Introduction about the topic
+TYPE HIER: Introduction about the topic
 
 # Motivation
 
 ## Motivation
 
-Motivation about the topic:
+TYPE HIER: Motivation about the topic
 
 # Research method
+## Research method (1) {auto-animate="true"}
+TYPE HIER: We choose the research method linear regression...
 
-## Research method
+## Research method (2) {auto-animate="true"}
 
-First, we run the regression:
+TYPE HIER: First, we run the regression:
 
 ```{r}
 #| echo: true
@@ -52,38 +55,313 @@ summary(m1)
 
 # Results
 
-## Results {auto-animate="true"}
+## Results
 
-``` r
-# Estimate simple model
+TYPE HIER: Explain what we see in the results
+
+```{r}
 summary(m1)
 ```
-## Results {auto-animate="true"}
-
-``` r
-# Estimate simple model
-m1 <- lm(minimum_nights ~ covid + as.factor(neighbourhood_num) + as.factor(roomtype_num) + accommodates + price + instant_bookable, df_cleaned)
-summary(m1)
-```
-
-Type explanation about the results here
 
 # Robustness checks
-
 We do need to perform some robustness checks
 
-## Independence
+## Independence (1) {auto-animate="true"}
 
-Type how we checked for independence
+```{r}
+#| echo: true
+#| output-location: fragment
+# create a scatterplot of the residuals against the predicted values from the linear regression model 'm1'
+plot(m1$fitted.values, m1$residuals, 
+     xlab = "Fitted Values", ylab = "Residuals", 
+     main = "Residuals vs. Fitted Values Plot",
+     ylim = c(-50, 60))
+abline(h = 0, lty = 2, col = 'red')
+```
 
-## Homodskedasticity
+## Independence (1) {auto-animate="true"}
+TYPE HIER: Type hier waarom de graph laat zien dat er geen independence is
 
-## Normality
+```{r}
+#| echo: false
+plot(m1$fitted.values, m1$residuals, 
+     xlab = "Fitted Values", ylab = "Residuals", 
+     main = "Residuals vs. Fitted Values Plot",
+     ylim = c(-50, 60))
+abline(h = 0, lty = 2, col = 'red')
+```
 
-## Linearity
+## Independence (2) {auto-animate="true"}
+
+```{r, echo=FALSE}
+# Add predicted values to the data frame
+df_cleaned$predicted <- predict(m1)
+```
+
+```{r}
+#| echo: true
+#| output-location: fragment
+# Create a scatterplot of predicted vs actual values
+ggplot(df_cleaned, aes(x = predicted, y = minimum_nights)) +
+  geom_point() + # adds points to the plot
+  geom_abline(intercept = 0, slope = 1, color = "red") + # adds a diagonal line to the plot to visualize where predicted = actual
+  xlab("Predicted Values") + # adds a label for the x-axis
+  ylab("Actual Values") + # adds a label for the y-axis
+  ggtitle("Predicted vs Actual Values Plot") # adds a title to the plot
+```
+
+## Independence (2) {auto-animate="true"}
+TYPE HIER: Type hier waarom de graph predicted vs actual laat zien dat er geen independence is
+
+```{r}
+#| echo: false
+# Create a scatterplot of predicted vs actual values
+ggplot(df_cleaned, aes(x = predicted, y = minimum_nights)) +
+  geom_point() + # adds points to the plot
+  geom_abline(intercept = 0, slope = 1, color = "red") + # adds a diagonal line to the plot to visualize where predicted = actual
+  xlab("Predicted Values") + # adds a label for the x-axis
+  ylab("Actual Values") + # adds a label for the y-axis
+  ggtitle("Predicted vs Actual Values Plot") # adds a title to the plot
+```
+
+## Independence (3) {auto-animate="true"}
+```r
+# perform Durbin-Watson test
+```
+
+## Independence (3) {auto-animate="true"}
+```r
+# perform Durbin-Watson test
+dwtest(m1)
+```
+
+```{r, echo=FALSE}
+# perform Durbin-Watson test
+library(lmtest)
+dwtest(m1)
+```
+
+## Independence (3) {auto-animate="true"}
+```r
+# perform Durbin-Watson test
+dwtest(m1)
+```
+
+```{r, echo=FALSE}
+# perform Durbin-Watson test
+library(lmtest)
+dwtest(m1)
+```
+TYPE HIER: a last thing we can do to check for independence is performing a Durbin-Watson test...
+
+## Homoskedasticity (1)
+We can use the same plots for testing homoskedasticity (scroll down to see both plots again). We can conclude...
+```{r}
+#| echo: false
+plot(m1$fitted.values, m1$residuals, 
+     xlab = "Fitted Values", ylab = "Residuals", 
+     main = "Residuals vs. Fitted Values Plot",
+     ylim = c(-50, 60))
+abline(h = 0, lty = 2, col = 'red')
+```
+
+```{r}
+ggplot(df_cleaned, aes(x = predicted, y = minimum_nights)) +
+  geom_point() + # adds points to the plot
+  geom_abline(intercept = 0, slope = 1, color = "red") + # adds a diagonal line to the plot to visualize where predicted = actual
+  xlab("Predicted Values") + # adds a label for the x-axis
+  ylab("Actual Values") + # adds a label for the y-axis
+  ggtitle("Predicted vs Actual Values Plot") # adds a title to the plot
+```
+
+## Homoskedasticity (2) {auto-animate="true"}
+```r
+# perform Breusch-Pagan test
+```
+
+## Homoskedasticity (2) {auto-animate="true"}
+```r
+# perform Breusch-Pagan test
+bptest(m1)
+```
+
+```{r, echo=FALSE}
+# perform Breusch-Pagan test
+bptest(m1)
+```
+
+## Homoskedasticity (2) {auto-animate="true"}
+```r
+# perform Breusch-Pagan test
+bptest(m1)
+```
+
+```{r, echo=FALSE}
+# perform Breusch-Pagan test
+bptest(m1)
+```
+TYPE HIER: a last thing we can do to check for homoskedasticity is performing a Breusch-Pagan test...
+
+## Normality (1) {auto-animate="true"}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+#| code-line-numbers: "1,2,3|1,2,3,4,5,6,7,8,9"
+## Making a dataframe with the residuals
+residuals <- resid(m1)
+residuals_df <- data.frame(residuals = residuals)
+
+# Test for normality of residuals with a histogram
+ggplot(residuals_df, aes(x = residuals)) + 
+  geom_histogram(binwidth = 0.5, color = "black", fill = "white") + 
+  xlab("Residuals") + ylab("Frequency") +
+  ggtitle("Histogram of Residuals")
+```
+
+## Normality (1) {auto-animate="true"}
+TYPE HIER: Type hier waarom de graph laat zien dat er geen independence is
+
+```{r}
+#| echo: false
+ggplot(residuals_df, aes(x = residuals)) + 
+  geom_histogram(binwidth = 0.5, color = "black", fill = "white") + 
+  xlab("Residuals") + ylab("Frequency") +
+  ggtitle("Histogram of Residuals")
+```
+
+## Normality (2) {auto-animate="true"}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+# Test for normality of residuals with a density plot
+ggdensity(residuals_df$residuals, 
+          main = "Density plot of residuals",
+          xlab = "residuals")
+```
+
+## Normality (2) {auto-animate="true"}
+TYPE HIER: Type hier waarom de graph laat zien dat er geen independence is
+
+```{r}
+#| echo: false
+ggdensity(residuals_df$residuals, 
+          main = "Density plot of residuals",
+          xlab = "residuals")
+```
+
+## Normality (3) {auto-animate="true"}
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+# Test for normality with a Q-Q plot
+qqnorm(residuals)
+qqline(residuals)
+```
+
+## Normality (3) {auto-animate="true"}
+TYPE HIER: Type hier waarom de graph laat zien dat er geen independence is
+
+```{r}
+#| echo: false
+qqnorm(residuals)
+qqline(residuals)
+```
+
+## Normality (4)
+```{r}
+# Create random subsample of 5000 observations, so we are able to run a Shapiro-Wilk normality test (5000 is the maximum sample size)
+set.seed(123)
+my_subsample <- residuals_df[sample(nrow(residuals_df), 5000), ]
+shapiro.test(my_subsample)
+```
+TYPE HIER: a last thing we can do to check for normality is performing a Shapiro-Wilk normality test...
+
+## Linearity (1)
+We can use the same first plot as used for testing independence and homoskedasticity. We can conclude...
+```{r}
+#| echo: false
+plot(m1$fitted.values, m1$residuals, 
+     xlab = "Fitted Values", ylab = "Residuals", 
+     main = "Residuals vs. Fitted Values Plot",
+     ylim = c(-50, 60))
+abline(h = 0, lty = 2, col = 'red')
+```
+
+## Multicolinearity (1)
+```{r}
+#| echo: true
+#| output-location: fragment
+#| code-line-numbers: "1,2|1,2,3"
+# VIF test 
+library(car)
+vif(m1)
+```
+TYPE HIER: one thing we can do to check for multicolinearity is calculating VIFs...
+
+## Multicolinearity (2) {auto-animate="true"}
+``` r
+# correlation matrix
+```
+
+## Multicolinearity (2) {auto-animate="true"}
+``` r
+# correlation matrix
+cor(df_cleaned[c("covid", "neighbourhood_num", "roomtype_num", "accommodates", "price", "instant_bookable")])
+```
+
+```{r, echo=FALSE}
+cor(df_cleaned[c("covid", "neighbourhood_num", "roomtype_num", "accommodates", "price", "instant_bookable")])
+```
+
+## Multicolinearity (2) {auto-animate="true"}
+``` r
+# correlation matrix
+cor(df_cleaned[c("covid", "neighbourhood_num", "roomtype_num", "accommodates", "price", "instant_bookable")])
+```
+
+```{r, echo=FALSE}
+cor(df_cleaned[c("covid", "neighbourhood_num", "roomtype_num", "accommodates", "price", "instant_bookable")])
+```
+TYPE HIER: one thing we can do to check for multicolinearity is making a correlation matrix...
+
+## Multicolinearity (3) {auto-animate="true"}
+``` r
+# eigenvalues and condition number 
+```
+
+## Multicolinearity (3) {auto-animate="true"}
+``` r
+# eigenvalues and condition number 
+eigen(cor(df_cleaned[c("covid", "neighbourhood_num", "roomtype_num", "accommodates", "price", "instant_bookable")]))$values
+kappa(model.matrix(m1))
+```
+
+```{r, echo=FALSE}
+eigen(cor(df_cleaned[c("covid", "neighbourhood_num", "roomtype_num", "accommodates", "price", "instant_bookable")]))$values
+kappa(model.matrix(m1))
+```
+
+## Multicolinearity (3) {auto-animate="true"}
+``` r
+# eigenvalues and condition number 
+eigen(cor(df_cleaned[c("covid", "neighbourhood_num", "roomtype_num", "accommodates", "price", "instant_bookable")]))$values
+kappa(model.matrix(m1))
+```
+
+```{r, echo=FALSE}
+eigen(cor(df_cleaned[c("covid", "neighbourhood_num", "roomtype_num", "accommodates", "price", "instant_bookable")]))$values
+kappa(model.matrix(m1))
+```
+TYPE HIER: a last thing we can do to check for multicolinearity is calculating eigenvalues and condition number...
+
 
 # Conclusion
 
 ## Conclusion
 
-Type the conclusion here
+TYPE HIER: Type the conclusion here
