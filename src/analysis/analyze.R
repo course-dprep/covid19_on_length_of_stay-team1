@@ -1,4 +1,5 @@
-# load 
+# load packages
+install.packages("lmtest")
 library(readr)
 library(dplyr)
 library(broom)
