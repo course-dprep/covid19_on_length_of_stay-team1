@@ -1,4 +1,4 @@
-# load 
+# load packages
 library(readr)
 library(dplyr)
 library(broom)
