@@ -37,7 +37,9 @@ TYPE HIER: Introduction about the topic
 TYPE HIER: Motivation about the topic
 
 # Research method
+
 ## Research method (1) {auto-animate="true"}
+
 TYPE HIER: We choose the research method linear regression...
 
 ## Research method (2) {auto-animate="true"}
@@ -64,6 +66,7 @@ summary(m1)
 ```
 
 # Robustness checks
+
 We do need to perform some robustness checks
 
 ## Independence (1) {auto-animate="true"}
@@ -80,6 +83,7 @@ abline(h = 0, lty = 2, col = 'red')
 ```
 
 ## Independence (1) {auto-animate="true"}
+
 TYPE HIER: Type hier waarom de graph laat zien dat er geen independence is
 
 ```{r}
@@ -111,6 +115,7 @@ ggplot(df_cleaned, aes(x = predicted, y = minimum_nights)) +
 ```
 
 ## Independence (2) {auto-animate="true"}
+
 TYPE HIER: Type hier waarom de graph predicted vs actual laat zien dat er geen independence is
 
 ```{r}
@@ -125,12 +130,14 @@ ggplot(df_cleaned, aes(x = predicted, y = minimum_nights)) +
 ```
 
 ## Independence (3) {auto-animate="true"}
-```r
+
+``` r
 # perform Durbin-Watson test
 ```
 
 ## Independence (3) {auto-animate="true"}
-```r
+
+``` r
 # perform Durbin-Watson test
 dwtest(m1)
 ```
@@ -142,7 +149,8 @@ dwtest(m1)
 ```
 
 ## Independence (3) {auto-animate="true"}
-```r
+
+``` r
 # perform Durbin-Watson test
 dwtest(m1)
 ```
@@ -152,10 +160,13 @@ dwtest(m1)
 library(lmtest)
 dwtest(m1)
 ```
+
 TYPE HIER: a last thing we can do to check for independence is performing a Durbin-Watson test...
 
 ## Homoskedasticity (1)
+
 We can use the same plots for testing homoskedasticity (scroll down to see both plots again). We can conclude...
+
 ```{r}
 #| echo: false
 plot(m1$fitted.values, m1$residuals, 
@@ -175,12 +186,14 @@ ggplot(df_cleaned, aes(x = predicted, y = minimum_nights)) +
 ```
 
 ## Homoskedasticity (2) {auto-animate="true"}
-```r
+
+``` r
 # perform Breusch-Pagan test
 ```
 
 ## Homoskedasticity (2) {auto-animate="true"}
-```r
+
+``` r
 # perform Breusch-Pagan test
 bptest(m1)
 ```
@@ -191,7 +204,8 @@ bptest(m1)
 ```
 
 ## Homoskedasticity (2) {auto-animate="true"}
-```r
+
+``` r
 # perform Breusch-Pagan test
 bptest(m1)
 ```
@@ -200,6 +214,7 @@ bptest(m1)
 # perform Breusch-Pagan test
 bptest(m1)
 ```
+
 TYPE HIER: a last thing we can do to check for homoskedasticity is performing a Breusch-Pagan test...
 
 ## Normality (1) {auto-animate="true"}
@@ -220,6 +235,7 @@ ggplot(residuals_df, aes(x = residuals)) +
 ```
 
 ## Normality (1) {auto-animate="true"}
+
 TYPE HIER: Type hier waarom de graph laat zien dat er geen independence is
 
 ```{r}
@@ -243,6 +259,7 @@ ggdensity(residuals_df$residuals,
 ```
 
 ## Normality (2) {auto-animate="true"}
+
 TYPE HIER: Type hier waarom de graph laat zien dat er geen independence is
 
 ```{r}
@@ -264,6 +281,7 @@ qqline(residuals)
 ```
 
 ## Normality (3) {auto-animate="true"}
+
 TYPE HIER: Type hier waarom de graph laat zien dat er geen independence is
 
 ```{r}
@@ -273,16 +291,20 @@ qqline(residuals)
 ```
 
 ## Normality (4)
-```{r}
+
+```{r, echo=TRUE}
 # Create random subsample of 5000 observations, so we are able to run a Shapiro-Wilk normality test (5000 is the maximum sample size)
 set.seed(123)
 my_subsample <- residuals_df[sample(nrow(residuals_df), 5000), ]
 shapiro.test(my_subsample)
 ```
+
 TYPE HIER: a last thing we can do to check for normality is performing a Shapiro-Wilk normality test...
 
 ## Linearity (1)
+
 We can use the same first plot as used for testing independence and homoskedasticity. We can conclude...
+
 ```{r}
 #| echo: false
 plot(m1$fitted.values, m1$residuals, 
@@ -293,6 +315,7 @@ abline(h = 0, lty = 2, col = 'red')
 ```
 
 ## Multicolinearity (1)
+
 ```{r}
 #| echo: true
 #| output-location: fragment
@@ -301,14 +324,17 @@ abline(h = 0, lty = 2, col = 'red')
 library(car)
 vif(m1)
 ```
+
 TYPE HIER: one thing we can do to check for multicolinearity is calculating VIFs...
 
 ## Multicolinearity (2) {auto-animate="true"}
+
 ``` r
 # correlation matrix
 ```
 
 ## Multicolinearity (2) {auto-animate="true"}
+
 ``` r
 # correlation matrix
 cor(df_cleaned[c("covid", "neighbourhood_num", "roomtype_num", "accommodates", "price", "instant_bookable")])
@@ -319,6 +345,7 @@ cor(df_cleaned[c("covid", "neighbourhood_num", "roomtype_num", "accommodates", "
 ```
 
 ## Multicolinearity (2) {auto-animate="true"}
+
 ``` r
 # correlation matrix
 cor(df_cleaned[c("covid", "neighbourhood_num", "roomtype_num", "accommodates", "price", "instant_bookable")])
@@ -327,14 +354,17 @@ cor(df_cleaned[c("covid", "neighbourhood_num", "roomtype_num", "accommodates", "
 ```{r, echo=FALSE}
 cor(df_cleaned[c("covid", "neighbourhood_num", "roomtype_num", "accommodates", "price", "instant_bookable")])
 ```
+
 TYPE HIER: one thing we can do to check for multicolinearity is making a correlation matrix...
 
 ## Multicolinearity (3) {auto-animate="true"}
+
 ``` r
 # eigenvalues and condition number 
 ```
 
 ## Multicolinearity (3) {auto-animate="true"}
+
 ``` r
 # eigenvalues and condition number 
 eigen(cor(df_cleaned[c("covid", "neighbourhood_num", "roomtype_num", "accommodates", "price", "instant_bookable")]))$values
@@ -347,6 +377,7 @@ kappa(model.matrix(m1))
 ```
 
 ## Multicolinearity (3) {auto-animate="true"}
+
 ``` r
 # eigenvalues and condition number 
 eigen(cor(df_cleaned[c("covid", "neighbourhood_num", "roomtype_num", "accommodates", "price", "instant_bookable")]))$values
@@ -357,8 +388,8 @@ kappa(model.matrix(m1))
 eigen(cor(df_cleaned[c("covid", "neighbourhood_num", "roomtype_num", "accommodates", "price", "instant_bookable")]))$values
 kappa(model.matrix(m1))
 ```
+
 TYPE HIER: a last thing we can do to check for multicolinearity is calculating eigenvalues and condition number...
-
 
 # Conclusion
 
