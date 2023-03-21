@@ -27,24 +27,23 @@ library(ggplot2)
 library(ggpubr)
 df_cleaned <- read_csv("../../gen/data-preparation/output/data_no_outliers.csv")
 ```
-
-TYPE HIER: Introduction about the topic
+For the project of the course Data Preparation and Workflow Management at Tilburg University, we decided to analyze the Airbnb market in Amsterdam and especially if the COVID-19 pandemic had an influence on the required minimum nights of stay. Especially since there are contradicted foundings in literature regarding this subject. A recent article by the New York Times suggested that the minimum nights of stay increased in New York City during the COVID-19 pandemic, whereas research by Kourtit et al. concluded that the minimum night requirements actually decreased during the pandemic. We decided to take a further look at these contradictions, by researching this subject. We collected data from Airbnb in Amsterdam, from 2020 as well as 2022, to see if there is any significant difference in the minimum nights of stay between *during* and *after* the COVID-19 pandemic.
 
 # Motivation
 
 ## Motivation
+Samengevoegd met Intro
 
-TYPE HIER: Motivation about the topic
+# Research Method
 
-# Research method
+## Research Method (1) {auto-animate="true"}
 
-## Research method (1) {auto-animate="true"}
-
-TYPE HIER: We choose the research method linear regression...
+We decided to run a linear regression on the variables of interest. The dependent variable, the required minimum nights, is a metric variable and the independent variable, the presence of COVID-19 (present vs. absent) is a non-metric variable. We have data from 2020 and 2022 for 3960 different Airbnb listings (in total 7920 observations). The variable gets the value 1 assigned if the data is from 2020, so when there was COVID-19 in the Netherlands. Following from that, the variable gets the value 0 assigned if the data is from 2022, when the COVID-19 pandemic no longer had far-reaching consequences in the Netherlands.
+We decided to not only include the minimum nights of stay and the presence of COVID-19, but also added some control variables to our analysis, to see if there are other effects that might play a role. Since these control variables are differing in metric and non-metric variables, we have chosen linear regression over an ANOVA-analysis.
 
 ## Research method (2) {auto-animate="true"}
 
-TYPE HIER: First, we run the regression:
+Next to the dependent variable, the *minimum_nights*, and the independent variable *covid*, we included some control variables in a first regression. The control variables *neighbourhood_num* and *roomtype_num* were converted to factors, in which each number represents a different neighbourhood or roomtype. Next to that, *accomodates*, *price* and *instant_bookable* were included in this regression.
 
 ```{r}
 #| echo: true
@@ -59,15 +58,15 @@ summary(m1)
 
 ## Results
 
-TYPE HIER: Explain what we see in the results
+Following from the output from the first regression, we can conclude that a lot of the estimates are not significant in this model. 
 
 ```{r}
 summary(m1)
 ```
 
-# Robustness checks
+# Robustness Checks
 
-We do need to perform some robustness checks
+Before any conclusions can be drawn, we need to perform some robustness checks.
 
 ## Independence (1) {auto-animate="true"}
 
@@ -84,7 +83,8 @@ abline(h = 0, lty = 2, col = 'red')
 
 ## Independence (1) {auto-animate="true"}
 
-TYPE HIER: Type hier waarom de graph laat zien dat er geen independence is
+A first option to check for independence, is to create a scatterplot of the residuals against the fitted values from the linear regression model (in this case m1).
+The residuals should be independent from the variable, but this scatterplot shows us that this is not the case. We can conclude that there is no independence of the residuals.
 
 ```{r}
 #| echo: false
@@ -116,7 +116,7 @@ ggplot(df_cleaned, aes(x = predicted, y = minimum_nights)) +
 
 ## Independence (2) {auto-animate="true"}
 
-TYPE HIER: Type hier waarom de graph predicted vs actual laat zien dat er geen independence is
+Next to that, we can create a scatterplot of the predicted values against the actual values. 
 
 ```{r}
 #| echo: false
@@ -165,7 +165,7 @@ TYPE HIER: a last thing we can do to check for independence is performing a Durb
 
 ## Homoskedasticity (1)
 
-We can use the same plots for testing homoskedasticity (scroll down to see both plots again). We can conclude...
+We can use the same plots when checking for homoskedasticity, as for checking independence.
 
 ```{r}
 #| echo: false
@@ -314,7 +314,7 @@ plot(m1$fitted.values, m1$residuals,
 abline(h = 0, lty = 2, col = 'red')
 ```
 
-## Multicolinearity (1)
+## Multicollinearity (1)
 
 ```{r}
 #| echo: true
@@ -327,13 +327,13 @@ vif(m1)
 
 TYPE HIER: one thing we can do to check for multicolinearity is calculating VIFs...
 
-## Multicolinearity (2) {auto-animate="true"}
+## Multicollinearity (2) {auto-animate="true"}
 
 ``` r
 # correlation matrix
 ```
 
-## Multicolinearity (2) {auto-animate="true"}
+## Multicollinearity (2) {auto-animate="true"}
 
 ``` r
 # correlation matrix
@@ -344,7 +344,7 @@ cor(df_cleaned[c("covid", "neighbourhood_num", "roomtype_num", "accommodates", "
 cor(df_cleaned[c("covid", "neighbourhood_num", "roomtype_num", "accommodates", "price", "instant_bookable")])
 ```
 
-## Multicolinearity (2) {auto-animate="true"}
+## Multicollinearity (2) {auto-animate="true"}
 
 ``` r
 # correlation matrix
@@ -357,13 +357,13 @@ cor(df_cleaned[c("covid", "neighbourhood_num", "roomtype_num", "accommodates", "
 
 TYPE HIER: one thing we can do to check for multicolinearity is making a correlation matrix...
 
-## Multicolinearity (3) {auto-animate="true"}
+## Multicollinearity (3) {auto-animate="true"}
 
 ``` r
 # eigenvalues and condition number 
 ```
 
-## Multicolinearity (3) {auto-animate="true"}
+## Multicollinearity (3) {auto-animate="true"}
 
 ``` r
 # eigenvalues and condition number 
@@ -376,7 +376,7 @@ eigen(cor(df_cleaned[c("covid", "neighbourhood_num", "roomtype_num", "accommodat
 kappa(model.matrix(m1))
 ```
 
-## Multicolinearity (3) {auto-animate="true"}
+## Multicollinearity (3) {auto-animate="true"}
 
 ``` r
 # eigenvalues and condition number 
