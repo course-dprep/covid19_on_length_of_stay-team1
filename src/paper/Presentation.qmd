@@ -10,12 +10,13 @@ format:
     controls: true
     transition: slide
     scrollable: true
+    smaller: true
 editor: visual
 ---
 
-# Introduction
+# Introduction and motivation
 
-## Introduction
+## Introduction and motivation
 
 ```{r, echo=FALSE}
 # load packages
@@ -28,11 +29,6 @@ library(ggpubr)
 df_cleaned <- read_csv("../../gen/data-preparation/output/data_no_outliers.csv")
 ```
 For the project of the course Data Preparation and Workflow Management at Tilburg University, we decided to analyze the Airbnb market in Amsterdam and especially if the COVID-19 pandemic had an influence on the required minimum nights of stay. Especially since there are contradicted foundings in literature regarding this subject. A recent article by the New York Times suggested that the minimum nights of stay increased in New York City during the COVID-19 pandemic, whereas research by Kourtit et al. concluded that the minimum night requirements actually decreased during the pandemic. We decided to take a further look at these contradictions, by researching this subject. We collected data from Airbnb in Amsterdam, from 2020 as well as 2022, to see if there is any significant difference in the minimum nights of stay between *during* and *after* the COVID-19 pandemic.
-
-# Motivation
-
-## Motivation
-Samengevoegd met Intro
 
 # Research Method
 
