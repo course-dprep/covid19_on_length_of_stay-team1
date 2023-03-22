@@ -46,6 +46,8 @@ install.packages("dplyr")
 install.packages("ggplot2")
 install.packages("broom")
 install.packages("ggpubr")
+install.packages("lmtest")
+install.packages("quarto")
 ```
 ## Running Instructions
 #### **Running The Code By Make**
@@ -59,7 +61,7 @@ git clone https://github.com/{your username}/covid19_on_length_of_stay-team1
 ```
 make
 ```
-4. When make has successfully run all the code, it will generate a ... 
+4. When make has successfully run all the code, it will generate a HTML with the presentation of our analysis. 
 5. To clean the data of all raw and unnecessary data files created during the pipeline, run the following code in the command line/terminal: 
 ```
 make clean
