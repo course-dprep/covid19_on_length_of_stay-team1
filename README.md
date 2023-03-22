@@ -10,9 +10,7 @@ Besides, there is a contradictory literature towards the affects of COVID-19 on 
 
 ## Method and Results
 #### **Method**
-To address our research question, we decided to run a linear regression on the variables of interest. The dependent variable in our research is the minimum nights of stay and our independent variable is the presence of COVID-19, which gets assigned either the value 0 or 1. We have collected data from 2020 and from 2022: all the data from 2020 is assigned to the value 1, and all the data from 2022 is assigned to the value 0. To get a more detailed explanation of the chosen method and included variables, we would like to refer to: 
-
-### **Results**
+To address our research question, we decided to run a linear regression on the variables of interest. The dependent variable in our research is the minimum nights of stay and our independent variable is the presence of COVID-19, which gets assigned either the value 0 or 1. We have collected data from 2020 and from 2022: all the data from 2020 is assigned to the value 1, and all the data from 2022 is assigned to the value 0. To get a more detailed explanation of the chosen method, included variables and results  we would like to refer to our [final report]()
 
 ## Repository Overview
 ```
@@ -38,7 +36,7 @@ Please follow the installation guides on https://tilburgsciencehub.com
 - Make
   - [Installation Guide](https://tilburgsciencehub.com/building-blocks/configure-your-computer/automation-and-workflows/make/)
 
-To install all necessary packages used in R, run the R script **'install_packages.R'**, which is added to our repository. Otherwise, install the following packages:
+To install all necessary packages used in R, run the R script `install_packages.R`, which is added to our repository. Otherwise, install the following packages:
 ```
 install.packages("readr")
 install.packages("tidyverse")
@@ -55,9 +53,9 @@ To run the code, follow these instructions:
 1. Fork this repository
 2. Open your command line/terminal and run the following code:
 ```
-git clone https://github.com/{your username}/covid19_on_length_of_stay-team1
+git clone https://github.com/{your username}/covid19_on_length_of_stay-team1.git
 ```
-3. Set your working directory to *'covid19_on_length_of_stay-team1'* and run the following command:
+3. Set your working directory to `covid19_on_length_of_stay-team1` and run the following command:
 ```
 make
 ```
@@ -74,6 +72,7 @@ An alternative route to run the code would be:
 3. ../src/data-preparation -> clean_data.R
 4. ../src/data-preparation -> remove_outliers.R
 5. ../src/analysis -> analyze.R
+6. ../src/paper -> Presentation.qmd
 
 ## Resources
 - Kolomatsky, M. (2021, 15 augustus). AirBnb and the Pandemic. The New York Times. https://www.nytimes.com/2021/07/15/realestate/what-happened-to-airbnb-during-the-pandemic.html
