@@ -1,9 +1,9 @@
 ---
-title: "The impact of covid 19 on the minimum nights of stay for airbnb's in Amsterdam"
+title: "The impact of COVID-19 on the minimum nights of stay for Airbnb's in Amsterdam"
 author: "Team 1"
 format: 
   revealjs:
-    footer: "covid 19 on minimum nights of stay - team 1"
+    footer: "COVID-19 on minimum nights of stay - Team 1"
     theme: default
     slide-number: true
     embed-resources: true
@@ -14,9 +14,9 @@ format:
 editor: visual
 ---
 
-# Introduction and motivation
+# Introduction and Motivation
 
-## Introduction and motivation
+## Introduction and Motivation
 
 ```{r, echo=FALSE}
 # load packages
@@ -37,9 +37,9 @@ For the project of the course Data Preparation and Workflow Management at Tilbur
 We decided to run a linear regression on the variables of interest. The dependent variable, the required minimum nights, is a metric variable and the independent variable, the presence of COVID-19 (present vs. absent) is a non-metric variable. We have data from 2020 and 2022 for 3960 different Airbnb listings (in total 7920 observations). The variable gets the value 1 assigned if the data is from 2020, so when there was COVID-19 in the Netherlands. Following from that, the variable gets the value 0 assigned if the data is from 2022, when the COVID-19 pandemic no longer had far-reaching consequences in the Netherlands.
 We decided to not only include the minimum nights of stay and the presence of COVID-19, but also added some control variables to our analysis, to see if there are other effects that might play a role. Since these control variables are differing in metric and non-metric variables, we have chosen linear regression over an ANOVA-analysis.
 
-## Research method (2) {auto-animate="true"}
+## Research Method (2) {auto-animate="true"}
 
-Next to the dependent variable, the *minimum_nights*, and the independent variable *covid*, we included some control variables in a first regression. The control variables *neighbourhood_num* and *roomtype_num* were converted to factors, in which each number represents a different neighbourhood or roomtype. Next to that, *accomodates*, *price* and *instant_bookable* were included in this regression.
+Next to the dependent variable, the *minimum_nights*, and the independent variable *covid*, we included some control variables in a first regression. The control variables *neighbourhood_num* and *roomtype_num* were converted to factors, in which each number represents a different neighbourhood or roomtype. Next to that, *accommodates*, *price* and *instant_bookable* were included in this regression.
 
 ```{r}
 #| echo: true
@@ -54,7 +54,7 @@ summary(m1)
 
 ## Results
 
-Following from the output from the first regression, we can conclude that a lot of the estimates are not significant in this model. 
+Following from the output from the first regression, we can conclude that a lot of the estimates are not significant in this model. Looking at the independent variable, *covid*, we can conclude that in case that *covid* was TRUE (observations assigned to the value 1, which means the data is from 2020), the minimum nights of stay decreased by 0.3726339. The fourth and 16th factor of the variable *neighbourhood_num* also seem to have a significant effect on the minimum nights of stay with the first factor of the variable *neighbourhood_num* as baseline. The fourth factor of the variable *neighbourhood_num* respresents the neighbourhood 'De Aker - Nieuw Sloten'and the 16th factor represents the neighbourhood 'Gaasperdam - Driemond'. Both neighbourhoods are not in the city center, so a possible explanation could be that these Airbnb listings are more focused on longer stays and a little less on tourists. Next to that, the second and third factor of the variable *roomtype_num* also seem to have an significant effect on the minimum nights of stay with the first factor of the variable *roomtype_num* as baseline. The second factor of the variable *roomtype_num* represents an entire home/apartment and the third factor represents a private room. Finally, the variables *price* and *instant_bookable* (when the value is TRUE), also seem to have a significant effect on the minimum nights of stay.represents a private room. Finally, the variables *price* and *instant_bookable* (when the value is TRUE), also seem to have a significant effect on the minimum nights of stay.
 
 ```{r}
 summary(m1)
@@ -62,7 +62,7 @@ summary(m1)
 
 # Robustness Checks
 
-Before any conclusions can be drawn, we need to perform some robustness checks.
+Before any conclusions can be drawn from the regression, we need to perform some robustness checks.
 
 ## Independence (1) {auto-animate="true"}
 
@@ -79,7 +79,7 @@ abline(h = 0, lty = 2, col = 'red')
 
 ## Independence (1) {auto-animate="true"}
 
-A first option to check for independence, is to create a scatterplot of the residuals against the fitted values from the linear regression model (in this case m1).
+A first option to check for independence, is to create a scatterplot of the residuals against the fitted values from the linear regression model (in this case *m1*).
 The residuals should be independent from the variable, but this scatterplot shows us that this is not the case. We can conclude that there is no independence of the residuals.
 
 ```{r}
@@ -112,7 +112,7 @@ ggplot(df_cleaned, aes(x = predicted, y = minimum_nights)) +
 
 ## Independence (2) {auto-animate="true"}
 
-Next to that, we can create a scatterplot of the predicted values against the actual values. 
+Next to that, we can create a scatterplot of the predicted values against the actual values. Looking at the scatterplot we notice that the dots are not randomly scattered. Although the plot does not show an obvious pattern it certainly does not represent a randomization of the dots since there are way more positive outliers than negative. 
 
 ```{r}
 #| echo: false
@@ -157,11 +157,11 @@ library(lmtest)
 dwtest(m1)
 ```
 
-TYPE HIER: a last thing we can do to check for independence is performing a Durbin-Watson test...
+A last option to check for independence, is to use a Durbin-Watson test. The Durbin Watson statistic is a test statistic used in statistics to detect autocorrelation in the residuals from a regression analysis. If the value of the test is DW = 2, then there is no autocorrelation. With the Durbin-Watson test we achieved a p-value < 0 which means that we would reject this null hypothesis. Following from the output, the DW = 0.1109, which means that there is autocorrelation and thus no independence.
 
 ## Homoskedasticity (1)
 
-We can use the same plots when checking for homoskedasticity, as for checking independence.
+We can use the same plots when checking for homoskedasticity, as for checking independence. The spread of the residuals is not consistent across all values of the predictor variables, so the homoskedasticity assumption is therefore not met.
 
 ```{r}
 #| echo: false
@@ -211,7 +211,7 @@ bptest(m1)
 bptest(m1)
 ```
 
-TYPE HIER: a last thing we can do to check for homoskedasticity is performing a Breusch-Pagan test...
+To provide more evidence that this assumption is not met, we used the Breusch-Pagan test. It tests whether the variance of the errors from a regression is dependent on the values of the independent variables. Since the p-value of this test is < 0.05, we can conclude that the homoskedasticity assumption is not met.
 
 ## Normality (1) {auto-animate="true"}
 
@@ -232,7 +232,7 @@ ggplot(residuals_df, aes(x = residuals)) +
 
 ## Normality (1) {auto-animate="true"}
 
-TYPE HIER: Type hier waarom de graph laat zien dat er geen independence is
+Overall, we can conclude there is non-normality for the residuals of our regression. Up until a certain value, there is normality of residuals, but high outliers cause it to be non-normal. Since it are only the high extremes that are not normal, we take no measures against non-normality of our residuals.
 
 ```{r}
 #| echo: false
@@ -256,8 +256,6 @@ ggdensity(residuals_df$residuals,
 
 ## Normality (2) {auto-animate="true"}
 
-TYPE HIER: Type hier waarom de graph laat zien dat er geen independence is
-
 ```{r}
 #| echo: false
 ggdensity(residuals_df$residuals, 
@@ -278,8 +276,6 @@ qqline(residuals)
 
 ## Normality (3) {auto-animate="true"}
 
-TYPE HIER: Type hier waarom de graph laat zien dat er geen independence is
-
 ```{r}
 #| echo: false
 qqnorm(residuals)
@@ -295,11 +291,11 @@ my_subsample <- residuals_df[sample(nrow(residuals_df), 5000), ]
 shapiro.test(my_subsample)
 ```
 
-TYPE HIER: a last thing we can do to check for normality is performing a Shapiro-Wilk normality test...
+A last option to check for normality is performing a Shapiro-Wilk test. The Shapiro–Wilk test can be used to decide whether or not a sample fits a normal distribution. Since the p-value < 0.05, the data significantly deviate from a normal distribution.
 
 ## Linearity (1)
 
-We can use the same first plot as used for testing independence and homoskedasticity. We can conclude...
+We can use the same first plot as used for testing independence and homoskedasticity. If the relationship between minimum_nights and the independent variables is linear, then the points in the scatterplot should be randomly scattered around a horizontal line at zero, indicating that the residuals are distributed randomly and evenly across the range of predicted minimum night values. However, if we look at our plot, this is not the case since the points in the scatterplot are not randomly scattered around the horizontal line zero. In our case we have a lot of positive outliers and almost no negative residuals. This indicates that there is no linearity.
 
 ```{r}
 #| echo: false
@@ -321,7 +317,7 @@ library(car)
 vif(m1)
 ```
 
-TYPE HIER: one thing we can do to check for multicolinearity is calculating VIFs...
+An option to check for multicollinearity is calculating VIFs. Looking at the VIF values we can conclude that there is no significant multicollinearity among the predictor variables. All the VIF values are around 1, where generally VIF values between 5 and 10 indicate significant multicollinearity.
 
 ## Multicollinearity (2) {auto-animate="true"}
 
@@ -350,8 +346,7 @@ cor(df_cleaned[c("covid", "neighbourhood_num", "roomtype_num", "accommodates", "
 ```{r, echo=FALSE}
 cor(df_cleaned[c("covid", "neighbourhood_num", "roomtype_num", "accommodates", "price", "instant_bookable")])
 ```
-
-TYPE HIER: one thing we can do to check for multicolinearity is making a correlation matrix...
+Another option to check for multicollinearity is creating a correlation matrix. Given the correlation coefficients in the matrix, none of them is > 0.7. The highest correlation coefficient is 0.51640989, between the variables *price* and *accommodates*.
 
 ## Multicollinearity (3) {auto-animate="true"}
 
@@ -385,10 +380,10 @@ eigen(cor(df_cleaned[c("covid", "neighbourhood_num", "roomtype_num", "accommodat
 kappa(model.matrix(m1))
 ```
 
-TYPE HIER: a last thing we can do to check for multicolinearity is calculating eigenvalues and condition number...
+Deze slide(s) moeten weg
 
 # Conclusion
 
 ## Conclusion
 
-TYPE HIER: Type the conclusion here
+Since the assumptions are not met, it is hard to draw decent conclusions about the linear regression. Further research could look into the data and try to meet the assumptions to eventually draw some meaningful conclusions. Another way is to conduct an ANOVA-analysis, leaving some of the control variables out and see if these lead to meaningful conclusions about the data.
