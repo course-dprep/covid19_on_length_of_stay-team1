@@ -124,7 +124,7 @@ detach("package:dplyr", unload=TRUE)
 library(car)
 m1 <- lm(minimum_nights ~ covid + as.factor(neighbourhood_num) + as.factor(roomtype_num) + accommodates + price + instant_bookable, df_cleaned)
 vif(m1)
-
+ 
 ## Looking at the VIF values we can conclude that there is no significant multicollinearity among the predictor variables
 ## All the VIF values are around 1 where generally VIF values between 5 and 10 indicate significant multicollinearity
 
