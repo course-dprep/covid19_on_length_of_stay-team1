@@ -18,13 +18,21 @@ df_cleaned <- df_cleaned %>% arrange(minimum_nights)
 
 # Keep only listings that are listed in both 2020 and 2022
 listings_both_years <- duplicated(df_cleaned$listing_url) | duplicated(df_cleaned$listing_url, fromLast = TRUE)
+
+# Subset data to only include these listings
 df_cleaned <- subset(df_cleaned, listings_both_years)
 
 # Change variable types to be able to use them for analysis and subsetting
+# Remove the $ and , characters from the 'price' variable
 df_cleaned$price <- gsub("\\$", "", df_cleaned$price)
 df_cleaned$price <- gsub(",", "", df_cleaned$price)
+
+# Remove the % character from the 'host_acceptance_rate' variable
 df_cleaned$host_acceptance_rate <- gsub("\\%", "", df_cleaned$host_acceptance_rate)
 
+# Convert the 'host_acceptance_rate', 'accommodates', 'price', 'minimum_nights', 
+# and 'availability_30' variables to numeric type
+# If 'host_acceptance_rate' is NA, keep it as NA
 df_cleaned$host_acceptance_rate <- ifelse(is.na(df_cleaned$host_acceptance_rate), NA, as.numeric(df_cleaned$host_acceptance_rate))
 df_cleaned$accommodates <- as.numeric(df_cleaned$accommodates)
 df_cleaned$price <- as.numeric(df_cleaned$price)
