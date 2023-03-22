@@ -39,5 +39,5 @@ df_cleaned[grepl('2020', df_cleaned$last_scraped),]$year_scraped <- '2020'
 df_cleaned[grepl('2022', df_cleaned$last_scraped),]$year_scraped <- '2022'
 df_cleaned$year_scraped <- as.numeric(df_cleaned$year_scraped)
 
-# Save cleaned data to a CSV file 
+# Save cleaned data to a CSV file
 write_csv(df_cleaned,file="../../gen/data-preparation/output/data_no_outliers.csv")
