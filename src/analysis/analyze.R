@@ -126,17 +126,8 @@ library(car)
 m1 <- lm(minimum_nights ~ covid + as.factor(neighbourhood_num) + as.factor(roomtype_num) + accommodates + price + instant_bookable, df_cleaned)
 vif(m1)
 
-# correlation matrix
-cor(df_cleaned[c("covid", "neighbourhood_num", "roomtype_num", "accommodates", "price", "instant_bookable")])
-
-# eigenvalues and condition number 
-eigen(cor(df_cleaned[c("covid", "neighbourhood_num", "roomtype_num", "accommodates", "price", "instant_bookable")]))$values
-kappa(model.matrix(m1))
-
 ## Looking at the VIF values we can conclude that there is no significant multicollinearity among the predictor variables
 ## All the VIF values are around 1 where generally VIF values between 5 and 10 indicate significant multicollinearity
-
-# Running the simple model again with possible changes (Jonas)
 
 # Save results
 write_csv(df_m1,file="../../gen/analysis/output/model_results.csv")
