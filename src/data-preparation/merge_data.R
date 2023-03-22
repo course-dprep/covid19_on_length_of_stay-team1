@@ -9,8 +9,10 @@ df2022 <- read_csv(gzfile("../../data/dataset2022.csv.gz"))
 cols1 = colnames(df2020)
 cols2 = colnames(df2022)
 
+# find common column names 
 cols = intersect(cols1, cols2)
 
+# merge datasets on common columns 
 df_merged <- rbind(df2020[, cols], df2022[, cols])
 
 # Save merged data
