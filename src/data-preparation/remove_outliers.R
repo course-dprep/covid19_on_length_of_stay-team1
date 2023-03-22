@@ -29,13 +29,15 @@ for (col_name in col_list) {
   
 }
 
-# make sure outliers are removed for both 2020 and 2022
+# Ensure that outliers are removed for both 2020 and 2022 datasets
 listings_both_years_2 <- duplicated(df_cleaned$listing_url) | duplicated(df_cleaned$listing_url, fromLast = TRUE)
 df_cleaned <- subset(df_cleaned, listings_both_years_2)
 
+# Assign year scraped for each observation
 df_cleaned$year_scraped = ''
 df_cleaned[grepl('2020', df_cleaned$last_scraped),]$year_scraped <- '2020'
 df_cleaned[grepl('2022', df_cleaned$last_scraped),]$year_scraped <- '2022'
 df_cleaned$year_scraped <- as.numeric(df_cleaned$year_scraped)
 
+# Save cleaned data to a CSV file 
 write_csv(df_cleaned,file="../../gen/data-preparation/output/data_no_outliers.csv")
