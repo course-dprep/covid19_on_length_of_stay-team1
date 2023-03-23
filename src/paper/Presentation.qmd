@@ -348,25 +348,6 @@ cor(df_cleaned[c("covid", "neighbourhood_num", "roomtype_num", "accommodates", "
 ```
 Another option to check for multicollinearity is creating a correlation matrix. Given the correlation coefficients in the matrix, none of them is > 0.7. The highest correlation coefficient is 0.51640989, between the variables *price* and *accommodates*.
 
-## Multicollinearity (3) {auto-animate="true"}
-
-``` r
-# eigenvalues and condition number 
-```
-
-## Multicollinearity (3) {auto-animate="true"}
-
-``` r
-# eigenvalues and condition number 
-eigen(cor(df_cleaned[c("covid", "neighbourhood_num", "roomtype_num", "accommodates", "price", "instant_bookable")]))$values
-kappa(model.matrix(m1))
-```
-
-```{r, echo=FALSE}
-eigen(cor(df_cleaned[c("covid", "neighbourhood_num", "roomtype_num", "accommodates", "price", "instant_bookable")]))$values
-kappa(model.matrix(m1))
-```
-
 # Conclusion
 
 ## Conclusion
