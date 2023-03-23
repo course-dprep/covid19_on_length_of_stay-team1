@@ -367,21 +367,6 @@ eigen(cor(df_cleaned[c("covid", "neighbourhood_num", "roomtype_num", "accommodat
 kappa(model.matrix(m1))
 ```
 
-## Multicollinearity (3) {auto-animate="true"}
-
-``` r
-# eigenvalues and condition number 
-eigen(cor(df_cleaned[c("covid", "neighbourhood_num", "roomtype_num", "accommodates", "price", "instant_bookable")]))$values
-kappa(model.matrix(m1))
-```
-
-```{r, echo=FALSE}
-eigen(cor(df_cleaned[c("covid", "neighbourhood_num", "roomtype_num", "accommodates", "price", "instant_bookable")]))$values
-kappa(model.matrix(m1))
-```
-
-Deze slide(s) moeten weg
-
 # Conclusion
 
 ## Conclusion
