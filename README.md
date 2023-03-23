@@ -10,7 +10,11 @@ Besides, there is a contradictory literature towards the affects of COVID-19 on 
 
 ## Method and Results
 #### **Method**
-To address our research question, we decided to run a linear regression on the variables of interest. The dependent variable in our research is the minimum nights of stay and our independent variable is the presence of COVID-19, which gets assigned either the value 0 or 1. We have collected data from 2020 and from 2022: all the data from 2020 is assigned to the value 1, and all the data from 2022 is assigned to the value 0. To get a more detailed explanation of the chosen method, included variables and results  we would like to refer to our [final report]()
+To address our research question, we decided to run a linear regression on the variables of interest. The dependent variable in our research is the minimum nights of stay and our independent variable is the presence of COVID-19, which gets assigned either the value 0 or 1. We have collected data from 2020 and from 2022: all the data from 2020 is assigned to the value 1, and all the data from 2022 is assigned to the value 0. We decided to not only include the minimum nights of stay and the presence of COVID-19, but also added some control variables to our analysis, to see if there are other effects that might play a role. Since these control variables are differing in metric and non-metric variables, we have chosen linear regression over an ANOVA-analysis.
+
+#### **Results**
+After we runned the linear regression, we decided to check the assumptions for a linear regression, to see if we could draw meaningful conclusions about our data. Following from our results the assumptions were unfortunately not met. This makes it hard to draw decent conclusions about the linear regression. To get a better look at the all the created plots and runned tests to check the assumptions, we recommend to take a look at our final presentation.
+Further research could look into the data and try to meet the assumptions to eventually draw some meaningful conclusions. Another way is to conduct an ANOVA-analysis, leaving some of the control variables out and see if these lead to meaningful conclusions about the data.
 
 ## Repository Overview
 ```
