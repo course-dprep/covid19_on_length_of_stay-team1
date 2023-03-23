@@ -35,6 +35,8 @@ Please follow the installation guides on https://tilburgsciencehub.com
   - [Installation Guide](https://tilburgsciencehub.com/building-blocks/configure-your-computer/statistics-and-computation/r/)
 - Make
   - [Installation Guide](https://tilburgsciencehub.com/building-blocks/configure-your-computer/automation-and-workflows/make/)
+- Quarto
+  - [Installation Guide](https://quarto.org/docs/get-started/)
 
 To install all necessary packages used in R, run the R script `install_packages.R`, which is added to our repository. Otherwise, install the following packages:
 ```
