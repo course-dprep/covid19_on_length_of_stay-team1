@@ -85,5 +85,5 @@ An alternative route to run the code would be:
 - Kourtit, K., Nijkamp, P., Östh, J., & Türk, U. (2022). Airbnb and COVID-19: SPACE-TIME vulnerability effects in six world-cities. Tourism Management, 93, 104569. https://doi.org/10.1016/j.tourman.2022.104569
 
 ## About
-This respository was made by Jonas Klein, Matthijs van Gils, Marijn Bransen and Dianne Burgess and was commissioned by Hannes Datta, proffesor at Tilburg University as part of the course 'Data Preparation and Workflow Management'.
+This respository was made by [Jonas Klein](https://github.com/KleinJonasUVT), [Matthijs van Gils](https://github.com/MatthijsvanGils), [Marijn Bransen](https://github.com/marijnbransen1998) and [Dianne Burgess](https://github.com/DianneBurgess) and was commissioned by [Hannes Datta](https://github.com/hannesdatta), proffesor at Tilburg University as part of the course 'Data Preparation and Workflow Management'.
 
